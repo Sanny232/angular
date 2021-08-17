@@ -1,0 +1,13 @@
+language: node_js
+node_js: 14.17.3
+before_install:
+- npm install -g @angular/cli
+install: npm install
+branches:
+  only:
+  - main
+deploy:
+  provider: heroku
+  app: angular-project-11
+  api_key:
+    secure: DYJ0xU02PGpuyHJMEmlj/CjEzcod0gJZqGDXKOBgvN1J+IywQkkZtyIuEWZ2EserQn8V4SDpcPvtUsaLUOyXn72J9jQnI1h4ufUAMY+lweDqdao3ILhbvMY0Si6zi/DOoAtBMi/u9XCKcX+hWcUqPEYjEH9ZhEkXPh4FlBYukOeOurvPaPWCLmWYLIqa25T6jOsUE7mAHZlsPtPXrI5PjhQROgiZOoC/CyVWNQtJQA44wD6ip3bnLeRyKgqchbs2MaS24TW+b3m3vn2Pm6baEvhpEGtdkgLKK6sq+5dCTgR+VjapoChEh5qUE2bahVEDR6Rgo2yPgLzM/GCYXw7kuKcGaCttnOWLfgEupH61MQcIY9SBGSqifFbcBsWbdsGjEgg473LqFSHa/2C5H4zRF4TuM3BxtKRf9d1RJlcQPoL2Z+xzd4K8hDVM++xHYf9aZGk87r6Ot09a6xOMv8nbSyBXTb533uyB0pnDhAmPxuECKteSHMZGvLZzoYuGngCko0FCjIIFoCb+Igb2ZSBRxSdxh8MrjhdPodroOh39sGr/7dH2tido4XG3vD4cr5vYp4o2bCXDNwHeOHH2EbuoRpt8zn/i6XjMq3ZvKqaf2JOVn2VJ4GhTG9NK4hTXaK5GkeSAyttE6Zxj7nEvG9/VX7gbe5dQRQ/KdX0mb70PWrs=
