@@ -2,6 +2,9 @@ language: node_js
 node_js: 14.17.3
 before_install:
 - npm install -g @angular/cli
+- cd server
+- npm install
+- cd ..
 install: npm install
 branches:
   only:
