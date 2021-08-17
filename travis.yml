@@ -13,4 +13,4 @@ deploy:
   provider: heroku
   app: angular-project-11
   api_key:
-    secure:
+    secure: ""
