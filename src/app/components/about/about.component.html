@@ -1,1 +1,15 @@
-<p>about works!</p>
+<div class="gamesWrapper">
+  <ng-container *ngFor="let game of games">
+    <mat-card class="gameCard">
+      <mat-card-title>{{game.name}}</mat-card-title>
+      <mat-card-subtitle>{{game.price}} UAH</mat-card-subtitle>
+      <mat-card-content>{{game.description}}</mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary">Add to library</button>
+      </mat-card-actions>
+    </mat-card>
+  </ng-container>
+  <div *ngIf="loading">Loading...</div>
+</div>
+
+
