@@ -34,7 +34,7 @@ const start = async () => {
     await mongoose.connect("mongodb+srv://admin:admin@cluster0.ik9e4.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
       useNewUrlParser: true, useUnifiedTopology: true,
     });
-    app.listen(8082);
+    app.listen(process.env.PORT || 8080);
     console.log('Started');
   } catch (err) {
     console.error(`Error on server startup: ${err.message}`);
