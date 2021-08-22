@@ -8,7 +8,10 @@ export class GamesService {
 
   constructor(private http: HttpClient) {}
 
-  getGames$(){
-    return this.http.get('https://angular-project-11.herokuapp.com/api/games/all')
+  getGames$(filters?: string[]){
+    const body = {
+      filters
+    }
+    return this.http.post('http://localhost:8082/api/games/all', body)
   }
 }

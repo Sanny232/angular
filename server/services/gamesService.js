@@ -1,7 +1,7 @@
 const {Game} = require('../models/Game');
 
-function getGames(){
-  return Game.find();
+function getGames(filters){
+  return Game.find({genre: {$in: filters}});
 }
 
 module.exports = {

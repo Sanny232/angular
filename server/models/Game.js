@@ -17,6 +17,9 @@ const Game = mongoose.model('Game', {
     type: Number,
     default: 5
   },
+  photo: {
+    type: String
+  },
   genre: {
     type: String,
     required: true

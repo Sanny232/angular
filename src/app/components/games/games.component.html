@@ -1,0 +1,35 @@
+<mat-drawer-container class="content">
+  <mat-drawer opened="{{filtersOpen}}" mode="side" class="sidenav" (window:resize)="onResize()">
+      <span class="genres-section">
+        <h1>Genres</h1>
+    <ul>
+      <li *ngFor="let subtask of subtasks">
+        <mat-checkbox [(ngModel)]="subtask.completed"
+                      color="primary"
+                      (change)="getSelected()">
+          {{subtask.name}}
+        </mat-checkbox>
+      </li>
+    </ul>
+  </span>
+  </mat-drawer>
+    <div class="gamesWrapper">
+      <ng-container *ngFor="let game of games">
+        <mat-card class="gameCard" routerLink="{{game._id}}">
+          <mat-card-title>{{game.name}}</mat-card-title>
+          <mat-card-subtitle>{{game.price}} UAH</mat-card-subtitle>
+          <img mat-card-image class="gameImage" src="{{game.photo}}">
+          <mat-card-content>{{game.description}}</mat-card-content>
+          <mat-card-actions (click)="stopProp($event)">
+            <button mat-raised-button color="primary" style="width: 100%">Add to library</button>
+          </mat-card-actions>
+        </mat-card>
+      </ng-container>
+    </div>
+    <div *ngIf="loading"></div>
+  <div *ngIf="filtersOpen === false" (click)="filtersOpen=true" class="openFilters"><mat-icon>filter_list</mat-icon></div>
+  <div *ngIf="filtersOpen === true" (click)="filtersOpen=false" class="openFilters"><mat-icon>keyboard_arrow_left</mat-icon></div>
+</mat-drawer-container>
+
+
+

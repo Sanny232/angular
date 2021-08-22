@@ -3,11 +3,12 @@ const {getGames} = require("../services/gamesService");
 const {asyncWrapper} = require("../utils/apiUtils");
 const router = express.Router();
 
-router.get('/all', asyncWrapper(async (req, res) => {
+router.post('/all', asyncWrapper(async (req, res) => {
   // const {userId} = req.user;
   // const payload = req.body;
   // payload.created_by = userId;
-  const games = await getGames();
+  const {filters} = req.body;
+  const games = await getGames(filters);
   return res.status(200).json(games);
 }))
 
