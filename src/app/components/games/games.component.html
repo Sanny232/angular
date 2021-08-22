@@ -13,6 +13,13 @@
     </ul>
   </span>
   </mat-drawer>
+  <div class="searchPanel">
+    <mat-form-field class="gamesSearch" appearance="standard">
+      <mat-label>Search games</mat-label>
+      <input matInput #search>
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
     <div class="gamesWrapper">
       <ng-container *ngFor="let game of games">
         <mat-card class="gameCard" routerLink="{{game._id}}">

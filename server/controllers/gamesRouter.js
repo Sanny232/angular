@@ -8,7 +8,8 @@ router.post('/all', asyncWrapper(async (req, res) => {
   // const payload = req.body;
   // payload.created_by = userId;
   const {filters} = req.body;
-  const games = await getGames(filters);
+  const {searchQuery} = req.body;
+  const games = await getGames(searchQuery, filters);
   return res.status(200).json(games);
 }))
 

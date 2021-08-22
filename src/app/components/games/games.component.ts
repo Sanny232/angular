@@ -1,12 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild, AfterViewInit} from '@angular/core';
 import {GamesService} from "../../services/games.service";
+import {FormControl, FormGroup} from "@angular/forms";
+import {fromEvent} from "rxjs";
+import {debounceTime, distinctUntilChanged, filter, tap} from "rxjs/operators";
 
 @Component({
   selector: 'app-games',
   templateUrl: './games.component.html',
   styleUrls: ['./games.component.css']
 })
-export class GamesComponent implements OnInit {
+export class GamesComponent implements OnInit, AfterViewInit {
+  @ViewChild('search') search: ElementRef;
+
   public games: any;
   public loading: Boolean;
   public filtersOpen: Boolean = true;
@@ -16,15 +21,27 @@ export class GamesComponent implements OnInit {
     {name: 'Fighting', completed: true},
     {name: 'Adventure', completed: true}
   ]
+
   constructor(private gameService: GamesService) { }
 
-  ngOnInit(): void {
-   this.getSelected();
-   this.onResize();
+  ngAfterViewInit() {
+    fromEvent(this.search.nativeElement,'keyup')
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged(),
+        tap(() => {
+          this.getSelected()
+        })
+      )
+      .subscribe();
   }
-  getGames(filters?: string[]){
+  ngOnInit(): void {
+   this.onResize();
+    this.getSelected();
+  }
+  getGames(searchQuery: String, filters: string[]){
     this.loading = true;
-    this.gameService.getGames$(filters).subscribe((res) => {
+    this.gameService.getGames$(searchQuery, filters).subscribe((res) => {
       this.games = res;
       this.loading = false;
     });
@@ -35,7 +52,8 @@ export class GamesComponent implements OnInit {
   getSelected(){
     const selected = this.subtasks.filter(el => el.completed);
     const filters = selected.map(el => el.name);
-    this.getGames(filters)
+    const searchQuery = this.search?.nativeElement.value || '';
+    this.getGames(searchQuery, filters)
   }
   stopProp(e: Event){
     e.stopPropagation();
