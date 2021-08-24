@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
+import {AuthService} from "../../services/auth.service";
+
 
 @Component({
   selector: 'app-login',
@@ -17,8 +19,11 @@ export class LoginComponent implements OnInit {
     return this.email.hasError('email') ? 'Not a valid email' : '';
   }
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
+  onSubmit(){
+    this.authService.signIn(this.email.value, this.password.value);
+  }
   ngOnInit(): void {
   }
 

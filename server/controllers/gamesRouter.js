@@ -1,12 +1,10 @@
 const express = require("express");
+const {authMiddleware} = require("../middlewares/authMiddleware");
 const {getGames} = require("../services/gamesService");
 const {asyncWrapper} = require("../utils/apiUtils");
 const router = express.Router();
 
-router.post('/all', asyncWrapper(async (req, res) => {
-  // const {userId} = req.user;
-  // const payload = req.body;
-  // payload.created_by = userId;
+router.post('/all', [authMiddleware], asyncWrapper(async (req, res) => {
   const {filters} = req.body;
   const {searchQuery} = req.body;
   const games = await getGames(searchQuery, filters);

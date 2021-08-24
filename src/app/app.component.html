@@ -57,31 +57,20 @@
     margin: 0 16px;
   }
 
-  .toolbar #twitter-logo {
-    height: 40px;
-    margin: 0 8px;
-  }
-
-  .toolbar #youtube-logo {
-    height: 40px;
-    margin: 0 16px;
-  }
-
-  .toolbar #twitter-logo:hover,
-  .toolbar #youtube-logo:hover {
-    opacity: 0.8;
-  }
-
   .card.card.highlight-card span {
     margin-left: 60px;
   }
-
+  .clickableIcon{
+    cursor: pointer;
+    margin-right: 10px;
+  }
   a,
   a:visited,
   a:hover {
     color: white;
     text-decoration: none;
     margin-left: 5px;
+    user-select: none;
   }
 
   a:hover {
@@ -143,11 +132,14 @@
     alt="Angular Logo"
     src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/768px-Steam_icon_logo.svg.png"
   />
-  <span><a routerLink="">Main</a></span>
-  <span><a routerLink="games">Games</a></span>
-  <span><a routerLink="library">Library</a></span>
-  <span><a routerLink="profile">Profile</a></span>
+  <ng-container *ngIf="loggedIn">
+    <span><a routerLink="">Main</a></span>
+    <span><a routerLink="games">Games</a></span>
+    <span><a routerLink="library">Library</a></span>
+    <span><a routerLink="profile">Profile</a></span>
+  </ng-container>
     <div class="spacer"></div>
+  <mat-icon class="clickableIcon" *ngIf="loggedIn" (click)="exit()">exit_to_app</mat-icon>
 </div>
 
 <router-outlet></router-outlet>

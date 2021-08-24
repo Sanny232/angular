@@ -15,6 +15,8 @@ const registration = async ({email, username, password}) => {
 
 const login = async ({email, password}) => {
   const user = await User.findOne({email});
+  if(!user)
+    throw new UnauthorizedError('Invalid username or password');
   if (!(await bcrypt.compare(password, user.password))) {
     throw new UnauthorizedError('Invalid username or password');
   }

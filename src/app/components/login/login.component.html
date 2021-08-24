@@ -1,6 +1,6 @@
 <mat-card class="form">
   <h1>Sign in</h1>
-  <form action="">
+  <form action="" (submit)="onSubmit()">
     <mat-form-field appearance="fill" class="formInput">
       <mat-label>Enter your email</mat-label>
       <input matInput placeholder="pat@example.com" [formControl]="email" required>
