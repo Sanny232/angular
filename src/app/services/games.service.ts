@@ -13,6 +13,6 @@ export class GamesService {
       searchQuery,
       filters
     }
-    return this.http.post('http://localhost:8082/api/games/all', body)
+    return this.http.post('https://angular-project-11.herokuapp.com/api/games/all', body)
   }
 }
