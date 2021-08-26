@@ -1,26 +1,26 @@
-import { NgModule } from '@angular/core';
+import {NgModule, Optional, SkipSelf} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MatCardModule} from "@angular/material/card";
-import {MatButtonModule} from "@angular/material/button";
-import {MatSidenavModule} from "@angular/material/sidenav";
-import {MatCheckboxModule} from "@angular/material/checkbox";
-import {MatInputModule} from "@angular/material/input";
-import {MatIconModule} from "@angular/material/icon";
-import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {LoginComponent} from "./components/login/login.component";
+import {SharedModule} from "../shared/shared.module";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [LoginComponent],
   imports: [
     CommonModule,
-    MatCardModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatCheckboxModule,
-    MatInputModule,
-    MatIconModule,
-    MatSnackBarModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SharedModule
+  ],
+  exports: [
   ]
 })
-export class CoreModule { }
+export class CoreModule {
+  constructor( @Optional() @SkipSelf() parentModule: CoreModule) {
+      if (parentModule) {
+        throw new Error(`Core module has already been loaded. Import Core modules in the AppModule only.`);
+      }
+    }
+}

@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {XyzComponent} from "./components/xyz/xyz.component";
-import {GamesComponent} from "./components/games/games.component";
-import {LoginComponent} from "./components/login/login.component";
-import {AuthGuard} from "./guards/auth.guard";
-import {LibraryComponent} from "./components/library/library.component";
+import {GamesComponent} from "./features/games/pages/games/games.component";
+import {AuthGuard} from "./core/guards/auth.guard";
+import {LibraryComponent} from "./features/games/pages/library/library.component";
+import {LoginComponent} from "./core/components/login/login.component";
 
 const routes: Routes = [{
   path: '',

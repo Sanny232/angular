@@ -7,12 +7,13 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class GamesService {
+  url: String = 'https://angular-project-11.herokuapp.com'
 
   constructor(private http: HttpClient) {}
 
   getGames$(searchQuery: String, filters: string[]){
-    const getGamesRequest = this.http.post('http://localhost:8082/api/games/all', {searchQuery, filters});
-    const getLibraryGamesRequest = this.http.get('http://localhost:8082/api/games/library');
+    const getGamesRequest = this.http.post(this.url+'/api/games/all', {searchQuery, filters});
+    const getLibraryGamesRequest = this.http.get(this.url+'/api/games/library');
 
     return forkJoin({
       getGamesRequest,

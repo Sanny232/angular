@@ -42,7 +42,6 @@ export class GamesComponent implements OnInit, AfterViewInit {
   getGames(searchQuery: String, filters: string[]){
     this.loading = true;
     this.gameService.getGames$(searchQuery, filters).subscribe((res) => {
-      console.log(res)
       this.games = res;
       this.loading = false;
     });

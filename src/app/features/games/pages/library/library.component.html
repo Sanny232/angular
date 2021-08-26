@@ -3,7 +3,7 @@
     <mat-card class="gameCard" routerLink="{{game._id}}">
       <mat-card-title>{{game.name}}</mat-card-title>
       <img mat-card-image class="gameImage" src="{{game.photo}}">
-      <mat-card-content>{{game.description}}</mat-card-content>
+      <mat-card-content>{{game.description | shortened}}</mat-card-content>
       <mat-card-actions (click)="$event.stopPropagation()">
         <button mat-raised-button color="primary" style="width: 45%" (click)="removeLibrary(game._id)">Delete</button>
         <button mat-raised-button color="primary" style="width: 45%">Download</button>

@@ -45,5 +45,11 @@ p{
   }
 }
 
-
+.load{
+  width: 100%;
+  right: 0px;
+  height: 10px;
+  position: absolute;
+  overflow: hidden;
+}
 

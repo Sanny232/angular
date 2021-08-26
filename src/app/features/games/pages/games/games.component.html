@@ -21,11 +21,11 @@
     </mat-form-field>
   </div>
     <div class="gamesWrapper">
+      <div *ngIf="loading" class="load"><mat-progress-bar mode="indeterminate"></mat-progress-bar></div>
       <ng-container *ngFor="let game of games">
-        <app-game-card [gameInfo]="game"></app-game-card>
+         <app-game-card [gameInfo]="game" (libStatusUpdate)="getSelected()"></app-game-card>
       </ng-container>
     </div>
-    <div *ngIf="loading"></div>
   <div *ngIf="filtersOpen === false" (click)="filtersOpen=true" class="openFilters"><mat-icon>filter_list</mat-icon></div>
   <div *ngIf="filtersOpen === true" (click)="filtersOpen=false" class="openFilters"><mat-icon>keyboard_arrow_left</mat-icon></div>
 </mat-drawer-container>
