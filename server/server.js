@@ -2,11 +2,13 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const compression = require('compression');
 const {gamesRouter} = require("./controllers/gamesRouter");
 const {ServerError} = require("./utils/errors");
 const {authRouter} = require("./controllers/authRouter");
 const app = express();
 
+app.use(compression());
 app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname + '/../dist/MyFirstCICDApp/'));
