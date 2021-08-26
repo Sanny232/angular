@@ -14,7 +14,6 @@ const User = mongoose.model('User', {
     type: String,
     required: true,
   },
-  games: [mongoose.Schema.Types.ObjectId],
   friends: [mongoose.Schema.Types.ObjectId]
 });
 

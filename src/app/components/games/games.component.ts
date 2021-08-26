@@ -42,6 +42,7 @@ export class GamesComponent implements OnInit, AfterViewInit {
   getGames(searchQuery: String, filters: string[]){
     this.loading = true;
     this.gameService.getGames$(searchQuery, filters).subscribe((res) => {
+      console.log(res)
       this.games = res;
       this.loading = false;
     });
@@ -54,8 +55,5 @@ export class GamesComponent implements OnInit, AfterViewInit {
     const filters = selected.map(el => el.name);
     const searchQuery = this.search?.nativeElement.value || '';
     this.getGames(searchQuery, filters)
-  }
-  stopProp(e: Event){
-    e.stopPropagation();
   }
 }

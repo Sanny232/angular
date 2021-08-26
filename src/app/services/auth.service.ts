@@ -8,7 +8,7 @@ import {BehaviorSubject} from "rxjs";
   providedIn: 'root'
 })
 export class AuthService {
-  isLoggedIn$ = new BehaviorSubject(false);
+  private isLoggedIn$ = new BehaviorSubject(false);
 
   constructor(private http: HttpClient,
               private _snackBar: MatSnackBar,
@@ -23,7 +23,7 @@ export class AuthService {
       email,
       password
     }
-    this.http.post('https://angular-project-11.herokuapp.com/api/auth/login', body).subscribe(
+    this.http.post('http://localhost:8082/api/auth/login', body).subscribe(
       (res: any) => {
         localStorage.setItem('access_token', res.jwt_token);
         this.isLoggedIn$.next(true);

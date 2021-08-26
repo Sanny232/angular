@@ -1,0 +1,16 @@
+div{
+  margin-top: 200px;
+}
+.gameCard{
+  width: 300px;
+  margin: 10px;
+}
+.gamesWrapper{
+  margin-top: 70px;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.gameImage{
+  height: 300px;
+}

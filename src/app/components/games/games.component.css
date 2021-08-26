@@ -1,10 +1,6 @@
 p{
   margin-top: 100px;
 }
-.gameCard{
-  width: 300px;
-  margin: 10px;
-}
 .gamesWrapper{
   margin-top: 70px;
   padding: 10px;
@@ -20,9 +16,6 @@ p{
   width: 200px;
   top: 70px;
   position: fixed;
-}
-.gameImage{
-  height: 300px;
 }
 .genres-section ul li{
   padding: 2px;
@@ -47,8 +40,10 @@ p{
   margin-left: 20px;
 }
 @media screen and (max-width:850px) {
-  .gameCard {
+  app-game-card {
     margin: 0 auto;
   }
 }
+
+
 

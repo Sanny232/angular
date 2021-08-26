@@ -1,4 +1,6 @@
 const express = require('express');
+const {User} = require("../models/User");
+const {addLibrary} = require("../services/libraryService");
 const router = express.Router();
 
 const {
@@ -19,7 +21,8 @@ router.post('/register',
     } = req.body;
 
     await registration({email, username, password});
-
+    const user = await User.findOne({email});
+    await addLibrary(user._id);
     return res.json({message: 'Account created successfully!'});
   }));
 

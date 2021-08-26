@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require("bcrypt");
+const {addLibrary} = require("./libraryService");
 const {UnauthorizedError} = require("../utils/errors");
 
 const {User} = require('../models/User');
