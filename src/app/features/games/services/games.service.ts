@@ -31,15 +31,15 @@ export class GamesService {
   }
 
   getLibraries$(){
-    return this.http.get('http://localhost:8082/api/games/library')
+    return this.http.get(this.url+'/api/games/library')
   }
   addGameToLib$(gameId: string){
     const body = {
       gameId
     }
-    return this.http.post('http://localhost:8082/api/games/library', body);
+    return this.http.post(this.url+'/api/games/library', body);
   }
   removeGameFromLibrary$(gameId: string){
-    return this.http.delete('http://localhost:8082/api/games/library/'+gameId);
+    return this.http.delete(this.url+'/api/games/library/'+gameId);
   }
 }
