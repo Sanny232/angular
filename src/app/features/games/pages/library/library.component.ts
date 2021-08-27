@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {GamesService} from "../../services/games.service";
-import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-library',
@@ -8,16 +7,16 @@ import {Observable} from "rxjs";
   styleUrls: ['./library.component.css']
 })
 export class LibraryComponent implements OnInit {
-  public library$: Observable<any>;
+  public library: any;
+  public loading: Boolean;
   constructor(private gameService: GamesService) { }
 
   getLibrary(){
-    this.library$ = this.gameService.getLibraries$();
-  }
-  removeLibrary(gameId: string){
-    this.gameService.removeGameFromLibrary$(gameId).subscribe((res) => {
-      this.getLibrary();
-    })
+    this.loading = true;
+    this.gameService.getLibraries$().subscribe(val => {
+      this.library = val;
+      this.loading = false;
+    });
   }
 
   ngOnInit(): void {

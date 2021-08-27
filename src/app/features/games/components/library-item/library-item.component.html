@@ -1,0 +1,10 @@
+<mat-card class="gameCard" routerLink="/games/{{gameInfo._id}}">
+  <mat-card-title>{{gameInfo.name}}</mat-card-title>
+  <img mat-card-image class="gameImage" src="{{gameInfo.photo}}">
+  <mat-card-content>{{gameInfo.description | shortened}}</mat-card-content>
+  <mat-card-actions (click)="$event.stopPropagation()">
+    <button mat-stroked-button color="primary" style="width: 45%" (click)="copyLink(gameInfo._id)">Share</button>
+    <button mat-raised-button color="primary" style="width: 45%" (click)="downloadGame(gameInfo.name, gameInfo._id)">Download</button>
+  </mat-card-actions>
+</mat-card>
+

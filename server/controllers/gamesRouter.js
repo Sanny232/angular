@@ -1,4 +1,6 @@
 const express = require("express");
+const mongoose = require("mongoose");
+const {getGameByID} = require("../services/gamesService");
 const {removeGameFromLib} = require("../services/libraryService");
 const {addGameToLib} = require("../services/libraryService");
 const {getLibraryGames} = require("../services/libraryService");
@@ -8,13 +10,14 @@ const {getGames} = require("../services/gamesService");
 const {asyncWrapper} = require("../utils/apiUtils");
 const router = express.Router();
 
+
 router.post('/all', [authMiddleware], asyncWrapper(async (req, res) => {
   const {filters} = req.body;
   const {searchQuery} = req.body;
   const {userId} = req.user;
   const games = await getGames(searchQuery, filters);
 
-  return res.status(200).json(games);
+  res.status(200).json(games);
 }))
 
 router.get('/library', [authMiddleware], asyncWrapper(async (req, res) => {
@@ -38,6 +41,15 @@ router.delete('/library/:gameId', [authMiddleware], asyncWrapper(async (req, res
   await removeGameFromLib(userId, gameId);
   res.json({message: 'OK'})
 }))
+
+router.get('/:gameId', [authMiddleware], asyncWrapper(async (req, res) => {
+  const {gameId} = req.params;
+  if(!mongoose.Types.ObjectId.isValid(gameId))
+    return res.json(null)
+  const game = await getGameByID(gameId);
+  return res.json(game);
+}))
+
 
 module.exports = {
   gamesRouter: router,

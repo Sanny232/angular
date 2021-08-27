@@ -7,7 +7,9 @@ import {GamesComponent} from "./pages/games/games.component";
 import {AppRoutingModule} from "../../app-routing.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ShortenedPipe } from './pipes/shortened.pipe';
-
+import { LibraryItemComponent } from './components/library-item/library-item.component';
+import {ClipboardModule} from '@angular/cdk/clipboard';
+import { GamePageComponent } from './pages/game-page/game-page.component';
 
 
 @NgModule({
@@ -15,12 +17,15 @@ import { ShortenedPipe } from './pipes/shortened.pipe';
     GameCardComponent,
     LibraryComponent,
     GamesComponent,
-    ShortenedPipe
+    ShortenedPipe,
+    LibraryItemComponent,
+    GamePageComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
     AppRoutingModule,
+    ClipboardModule,
     FormsModule,
     ReactiveFormsModule
   ],

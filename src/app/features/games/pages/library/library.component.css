@@ -1,5 +1,5 @@
 div{
-  margin-top: 200px;
+  margin-top: 70px;
 }
 .gameCard{
   width: 300px;
@@ -13,4 +13,17 @@ div{
 }
 .gameImage{
   height: 300px;
+}
+.load{
+  width: 100%;
+  top: 0px;
+  right: 0px;
+  height: 10px;
+  position: absolute;
+  overflow: hidden;
+}
+@media screen and (max-width:850px) {
+  app-library-item {
+    margin: 0 auto;
+  }
 }

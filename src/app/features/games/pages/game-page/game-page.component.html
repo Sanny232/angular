@@ -1,0 +1,12 @@
+<div *ngIf="gameInfo">
+  <img src="{{gameInfo.photo}}" alt="">
+  <p>Name: {{gameInfo.name}}</p>
+  <p>Description: {{gameInfo.description}}</p>
+  <p>Price: {{gameInfo.price}}</p>
+  <p>Genre: {{gameInfo.genre}}</p>
+  <p>Rating: {{gameInfo.scores}}</p>
+
+</div>
+<div>
+  <p *ngIf="!gameInfo">Game Not Found</p>
+</div>

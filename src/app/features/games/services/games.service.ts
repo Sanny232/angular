@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class GamesService {
-  url: String = 'https://angular-project-11.herokuapp.com'
+  url: String = 'http://localhost:8082';
 
   constructor(private http: HttpClient) {}
 
@@ -41,5 +41,8 @@ export class GamesService {
   }
   removeGameFromLibrary$(gameId: string){
     return this.http.delete(this.url+'/api/games/library/'+gameId);
+  }
+  getGameInfo$(gameId: string){
+    return this.http.get(this.url+'/api/games/'+gameId);
   }
 }
