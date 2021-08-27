@@ -1,8 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild, AfterViewInit} from '@angular/core';
 import {GamesService} from "../../services/games.service";
-import {FormControl, FormGroup} from "@angular/forms";
-import {fromEvent} from "rxjs";
-import {debounceTime, distinctUntilChanged, filter, tap} from "rxjs/operators";
+import {fromEvent, Observable} from "rxjs";
+import {debounceTime, distinctUntilChanged, tap} from "rxjs/operators";
 
 @Component({
   selector: 'app-games',
@@ -12,8 +11,8 @@ import {debounceTime, distinctUntilChanged, filter, tap} from "rxjs/operators";
 export class GamesComponent implements OnInit, AfterViewInit {
   @ViewChild('search') search: ElementRef;
 
-  public games: any;
-  public loading: Boolean;
+  public games$: Observable<any>;
+  public isLoading$: Observable<boolean>;
   public filtersOpen: Boolean = true;
 
   public subtasks = [
@@ -30,21 +29,15 @@ export class GamesComponent implements OnInit, AfterViewInit {
         debounceTime(500),
         distinctUntilChanged(),
         tap(() => {
-          this.getSelected()
+          this.gameService.setSearchString(this.search?.nativeElement.value || '');
         })
-      )
-      .subscribe();
+      ).subscribe()
   }
   ngOnInit(): void {
    this.onResize();
-    this.getSelected();
-  }
-  getGames(searchQuery: String, filters: string[]){
-    this.loading = true;
-    this.gameService.getGames$(searchQuery, filters).subscribe((res) => {
-      this.games = res;
-      this.loading = false;
-    });
+   this.gameService.fetchGames$();
+   this.isLoading$ = this.gameService.isLoading$();
+   this.games$ = this.gameService.getGames$();
   }
   onResize(){
     this.filtersOpen = window.innerWidth > 500;
@@ -52,7 +45,6 @@ export class GamesComponent implements OnInit, AfterViewInit {
   getSelected(){
     const selected = this.subtasks.filter(el => el.completed);
     const filters = selected.map(el => el.name);
-    const searchQuery = this.search?.nativeElement.value || '';
-    this.getGames(searchQuery, filters)
+    this.gameService.setFilters(filters);
   }
 }

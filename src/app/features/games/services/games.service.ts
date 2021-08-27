@@ -1,18 +1,43 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {forkJoin} from "rxjs";
-import { map } from 'rxjs/operators';
+import {BehaviorSubject, forkJoin} from "rxjs";
+import {map, pluck} from 'rxjs/operators';
+import {StoreService} from "./store.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class GamesService {
-  url: String = 'http://localhost:8082';
+export class GamesService extends StoreService {
+  private url: String = 'http://localhost:8082';
+  private filters: string[];
+  private searchQuery: string;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    super();
+  }
 
-  getGames$(searchQuery: String, filters: string[]){
-    const getGamesRequest = this.http.post(this.url+'/api/games/all', {searchQuery, filters});
+  isLoading$(){
+    return this.store$.pipe(pluck('loading'));
+  }
+
+  setFilters(fil: string[]){
+    this.setState$({filters: fil});
+    this.fetchGames$();
+  }
+  setSearchString(search: string){
+    this.setState$({searchQuery: search});
+    this.fetchGames$();
+  }
+  getGames$(){
+    return this.store$.pipe(pluck('games'))
+  }
+  fetchGames$(){
+    console.log('LOAD GAMES')
+    this.setState$({loading: true});
+    this.store$.pipe(pluck('filters')).subscribe((value) => this.filters = value);
+    this.store$.pipe(pluck('searchQuery')).subscribe((value) => this.searchQuery = value);
+
+    const getGamesRequest = this.http.post(this.url+'/api/games/all', {searchQuery: this.searchQuery, filters: this.filters});
     const getLibraryGamesRequest = this.http.get(this.url+'/api/games/library');
 
     return forkJoin({
@@ -28,20 +53,9 @@ export class GamesService {
         })
       ]
     }))
+      .subscribe((val) => this.setState$({games: val, loading: false}));
   }
 
-  getLibraries$(){
-    return this.http.get(this.url+'/api/games/library')
-  }
-  addGameToLib$(gameId: string){
-    const body = {
-      gameId
-    }
-    return this.http.post(this.url+'/api/games/library', body);
-  }
-  removeGameFromLibrary$(gameId: string){
-    return this.http.delete(this.url+'/api/games/library/'+gameId);
-  }
   getGameInfo$(gameId: string){
     return this.http.get(this.url+'/api/games/'+gameId);
   }

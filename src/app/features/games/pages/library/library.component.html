@@ -1,6 +1,6 @@
-<div *ngIf="loading" class="load"><mat-progress-bar mode="indeterminate"></mat-progress-bar></div>
+<div *ngIf="isLoading$ | async" class="load"><mat-progress-bar mode="indeterminate"></mat-progress-bar></div>
 <div class="gamesWrapper">
-  <ng-container *ngFor="let game of library">
+  <ng-container *ngFor="let game of library$ | async">
     <app-library-item [gameInfo]="game"></app-library-item>
   </ng-container>
 </div>

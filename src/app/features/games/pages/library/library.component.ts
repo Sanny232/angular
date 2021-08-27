@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {GamesService} from "../../services/games.service";
+import {LibraryService} from "../../services/library.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-library',
@@ -7,19 +8,13 @@ import {GamesService} from "../../services/games.service";
   styleUrls: ['./library.component.css']
 })
 export class LibraryComponent implements OnInit {
-  public library: any;
-  public loading: Boolean;
-  constructor(private gameService: GamesService) { }
-
-  getLibrary(){
-    this.loading = true;
-    this.gameService.getLibraries$().subscribe(val => {
-      this.library = val;
-      this.loading = false;
-    });
-  }
+  public isLoading$: Observable<boolean>;
+  constructor(private libraryService: LibraryService) { }
+  public library$: Observable<any>;
 
   ngOnInit(): void {
-    this.getLibrary();
+    this.libraryService.updateLibrary();
+    this.isLoading$ = this.libraryService.isLoading$();
+    this.library$ = this.libraryService.getLibrary$();
   }
 }

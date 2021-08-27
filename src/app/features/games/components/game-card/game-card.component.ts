@@ -1,32 +1,20 @@
-import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {LibraryService} from "../../services/library.service";
 import {GamesService} from "../../services/games.service";
-
-
 
 @Component({
   selector: 'app-game-card',
   templateUrl: './game-card.component.html',
   styleUrls: ['./game-card.component.css']
 })
-export class GameCardComponent implements OnInit {
+export class GameCardComponent {
   @Input() gameInfo : any;
-  @Output() libStatusUpdate = new EventEmitter();
-
-  constructor(private gameService: GamesService) { }
+  constructor(private libraryService: LibraryService) { }
 
   addToLib(id: string){
-    this.gameService.addGameToLib$(id).subscribe(() => {
-        this.libStatusUpdate.emit();
-    }
-    );
+    this.libraryService.addGameToLib(id);
   }
   removeFromLib(id: string){
-    this.gameService.removeGameFromLibrary$(id).subscribe(() => {
-      this.libStatusUpdate.emit();
-    })
+    this.libraryService.removeGameFromLibrary(id);
   }
-
-  ngOnInit(): void {
-  }
-
 }

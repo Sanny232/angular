@@ -21,9 +21,9 @@
     </mat-form-field>
   </div>
     <div class="gamesWrapper">
-      <div *ngIf="loading" class="load"><mat-progress-bar mode="indeterminate"></mat-progress-bar></div>
-      <ng-container *ngFor="let game of games">
-         <app-game-card [gameInfo]="game" (libStatusUpdate)="getSelected()"></app-game-card>
+      <div *ngIf="isLoading$ | async" class="load"><mat-progress-bar mode="indeterminate"></mat-progress-bar></div>
+      <ng-container *ngFor="let game of games$ | async">
+         <app-game-card [gameInfo]="game"></app-game-card>
       </ng-container>
     </div>
   <div *ngIf="filtersOpen === false" (click)="filtersOpen=true" class="openFilters"><mat-icon>filter_list</mat-icon></div>
