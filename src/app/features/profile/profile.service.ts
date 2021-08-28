@@ -5,10 +5,10 @@ import {HttpClient} from "@angular/common/http";
   providedIn: 'root'
 })
 export class ProfileService {
-
+  private url: String = 'https://angular-project-11.herokuapp.com';
   constructor(private http: HttpClient) { }
 
   getProfileData$(){
-    return this.http.get('http://localhost:8082/api/profile/me');
+    return this.http.get(this.url+'/api/profile/me');
   }
 }

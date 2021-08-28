@@ -1,4 +1,5 @@
 const express = require("express");
+const {getPossibleFriends} = require("../services/friendsService");
 const {removeFriend} = require("../services/friendsService");
 const {rejectRequest} = require("../services/friendsService");
 const {getRequestsToUser} = require("../services/friendsService");
@@ -46,7 +47,12 @@ router.delete('/:id', [authMiddleware], asyncWrapper(async (req, res) => {
   await removeFriend(userId, id);
   res.json({message: "OK"});
 }))
-
+router.post('/search', [authMiddleware], asyncWrapper(async (req, res) => {
+  const {userId} = req.user;
+  const {searchQuery} = req.body;
+  const friends = await getPossibleFriends(userId, searchQuery);
+  return res.json(friends);
+}));
 module.exports = {
   friendsRouter: router,
 };

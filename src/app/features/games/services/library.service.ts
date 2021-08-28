@@ -8,7 +8,7 @@ import {GamesService} from "./games.service";
   providedIn: 'root'
 })
 export class LibraryService extends StoreService{
-  private url: String = 'http://localhost:8082';
+  private url: String = 'https://angular-project-11.herokuapp.com';
   constructor(private http: HttpClient, private gamesService: GamesService) {
     super();
   }

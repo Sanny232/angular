@@ -7,8 +7,14 @@ import {LoginComponent} from "./core/components/login/login.component";
 import {GamePageComponent} from "./features/games/pages/game-page/game-page.component";
 import {GamePageResolver} from "./features/games/resolvers/game-page.resolver";
 
-const routes: Routes = [{
-  path: '',
+const routes: Routes = [
+  {
+    path: '',
+    redirectTo: '/games',
+    pathMatch: 'full'
+  },
+  {
+  path: 'login',
   component: LoginComponent,
   pathMatch: 'full'
 },{

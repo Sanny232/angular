@@ -1,11 +1,11 @@
-<div *ngIf="gameInfo">
+<mat-card *ngIf="gameInfo" class="content">
   <img src="{{gameInfo.photo}}" alt="">
-  <p>Name: {{gameInfo.name}}</p>
+  <mat-card-title>{{gameInfo.name}}</mat-card-title>
   <p>Description: {{gameInfo.description}}</p>
   <p>Price: {{gameInfo.price}}</p>
   <p>Genre: {{gameInfo.genre}}</p>
   <p>Rating: {{gameInfo.scores}}</p>
-</div>
-<div>
+</mat-card>
+<div class="content">
   <p *ngIf="!gameInfo">Game Not Found</p>
 </div>

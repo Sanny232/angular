@@ -8,7 +8,7 @@ import {BehaviorSubject} from "rxjs";
   providedIn: 'root'
 })
 export class AuthService {
-  url: String = 'http://localhost:8082'
+  private url: String = 'https://angular-project-11.herokuapp.com';
   private isLoggedIn$ = new BehaviorSubject(false);
 
   constructor(private http: HttpClient,
@@ -35,7 +35,7 @@ export class AuthService {
   logOut(){
     localStorage.removeItem('access_token');
     this.isLoggedIn$.next(false);
-    this.router.navigate(['']);
+    this.router.navigate(['login']);
   }
   logged$(){
     return this.isLoggedIn$;

@@ -6,19 +6,17 @@ import {StoreService} from "./store.service";
   providedIn: 'root'
 })
 export class FriendsService extends StoreService{
+  private url: String = 'https://angular-project-11.herokuapp.com';
   updateFriends(){
-    this.http.get('http://localhost:8082/api/friends/mine').subscribe((value) => {
-      this.setState$({friends: value});
+    this.setState$({loading: true});
+    this.http.get(this.url+'/api/friends/mine').subscribe((value) => {
+      this.setState$({friends: value, loading: false});
     });
   }
   removeFriend(id: string){
-    this.http.delete('http://localhost:8082/api/friends/'+id).subscribe((value) => {
+    this.http.delete(this.url+'/api/friends/'+id).subscribe((value) => {
       this.updateFriends();
     });
-  }
-  setSearchString(value: string){
-    this.setState$({search: value});
-    //this.updateAllData();
   }
 
   constructor(private http: HttpClient) {

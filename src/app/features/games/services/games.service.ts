@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject, forkJoin} from "rxjs";
+import {forkJoin} from "rxjs";
 import {map, pluck} from 'rxjs/operators';
 import {StoreService} from "./store.service";
 
@@ -8,7 +8,7 @@ import {StoreService} from "./store.service";
   providedIn: 'root'
 })
 export class GamesService extends StoreService {
-  private url: String = 'http://localhost:8082';
+  private url: String = 'https://angular-project-11.herokuapp.com';
   private filters: string[];
   private searchQuery: string;
 

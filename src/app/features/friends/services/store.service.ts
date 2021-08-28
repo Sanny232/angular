@@ -6,7 +6,7 @@ import {pluck} from "rxjs/operators";
   providedIn: 'root'
 })
 export class StoreService {
-  private friendsStore$ = new BehaviorSubject({friends: [], requests: [], loading: false});
+  protected friendsStore$ = new BehaviorSubject({friends: [], requests: [], possible: [], loading: false, search: ''});
   setState$(newState: any){
     this.friendsStore$.next({...this.friendsStore$.getValue(), ...newState});
   }
@@ -15,6 +15,12 @@ export class StoreService {
   }
   getRequests$(){
     return this.friendsStore$.pipe(pluck('requests'));
+  }
+  getPossibleFriends$(){
+    return this.friendsStore$.pipe(pluck('possible'));
+  }
+  isLoading$(){
+    return this.friendsStore$.pipe(pluck('loading'));
   }
 
   constructor() { }

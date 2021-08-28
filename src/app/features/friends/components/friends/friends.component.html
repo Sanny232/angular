@@ -1,7 +1,8 @@
 <div class="content">
   <mat-tab-group mat-align-tabs="center" animationDuration="0ms" (selectedIndexChange)=updateData($event)>
     <mat-tab>
-      <p *ngIf="(friends$ | async)?.length==0">No friends! ;(</p>
+      <p *ngIf="(friends$ | async)?.length==0 && !(loading$ | async)">No friends! ;(</p>
+      <p *ngIf="loading$ | async"><mat-progress-bar mode="indeterminate"></mat-progress-bar></p>
       <ng-template mat-tab-label>
         <mat-icon class="tab-icon">person</mat-icon>
         Friends
@@ -19,18 +20,25 @@
         <mat-icon class="tab-icon">search</mat-icon>
         Find new
       </ng-template>
-      <mat-form-field class="friendsSearch" appearance="standard">
+      <mat-form-field class="friendsSearch" appearance="standard" autocomplete="off">
         <mat-label>Search for friends</mat-label>
-        <input matInput #search>
+        <input matInput #search type="search" autocomplete="off">
         <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
+      <mat-list role="list">
+        <mat-list-item class="item" role="listitem" *ngFor="let friend of possibleFriends$ | async">{{friend.username}}
+          <div class="spacer"></div>
+          <button mat-raised-button color="primary" (click)="sendRequest(friend._id)">Send request</button>
+        </mat-list-item>
+      </mat-list>
     </mat-tab>
     <mat-tab>
       <ng-template mat-tab-label>
         <mat-icon class="tab-icon">person_add</mat-icon>
         Requests
       </ng-template>
-      <p *ngIf="(requests$ | async)?.length==0">No requests!</p>
+      <p *ngIf="(requests$ | async)?.length==0 && !(loading$ | async)">No requests</p>
+      <p *ngIf="loading$ | async"><mat-progress-bar mode="indeterminate"></mat-progress-bar></p>
       <mat-list role="list">
         <mat-list-item class="item" role="listitem" *ngFor="let req of requests$ | async">{{req.senderUsername}}
           <div class="spacer"></div>
