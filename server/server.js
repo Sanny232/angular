@@ -3,6 +3,8 @@ const path = require('path');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const compression = require('compression');
+const {friendsRouter} = require("./controllers/friendsRouter");
+const {profileRouter} = require("./controllers/profileRouter");
 const {gamesRouter} = require("./controllers/gamesRouter");
 const {ServerError} = require("./utils/errors");
 const {authRouter} = require("./controllers/authRouter");
@@ -15,6 +17,8 @@ app.use(express.static(__dirname + '/../dist/MyFirstCICDApp/'));
 
 app.use('/api/auth', authRouter);
 app.use('/api/games', gamesRouter);
+app.use('/api/profile', profileRouter);
+app.use('/api/friends', friendsRouter);
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname + '/../dist/MyFirstCICDApp/index.html'))

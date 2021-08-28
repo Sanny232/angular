@@ -29,7 +29,13 @@ const login = async ({email, password}) => {
   }, 'SECRET');
 };
 
+const getProfile = _id => {
+  return User.findOne({_id});
+}
+
+
 module.exports = {
   registration,
   login,
+  getProfile
 };

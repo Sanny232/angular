@@ -27,6 +27,8 @@ const routes: Routes = [{
     path: 'library',
     component: LibraryComponent
   },
+  { path: 'profile', loadChildren: () => import('./features/profile/profile.module').then(m => m.ProfileModule) },
+  { path: 'friends', loadChildren: () => import('./features/friends/friends.module').then(m => m.FriendsModule) },
   {path: '**', redirectTo: 'games'}
 ];
 
