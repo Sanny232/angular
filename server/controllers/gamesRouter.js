@@ -10,19 +10,18 @@ const {getGames} = require("../services/gamesService");
 const {asyncWrapper} = require("../utils/apiUtils");
 const router = express.Router();
 
-
 router.post('/all', [authMiddleware], asyncWrapper(async (req, res) => {
   const {filters} = req.body;
   const {searchQuery} = req.body;
-  const {userId} = req.user;
-  const games = await getGames(searchQuery, filters);
+  const {price} = req.body;
+
+  const games = await getGames(searchQuery, filters, price);
 
   res.status(200).json(games);
 }))
 
 router.get('/library', [authMiddleware], asyncWrapper(async (req, res) => {
   const {userId} = req.user;
-  //await addLibrary(userId);
   const lib = await getLibrary(userId);
   const library = await getLibraryGames(lib)
   res.json(library)

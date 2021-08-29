@@ -9,7 +9,8 @@ export class StoreService {
     games: [],
     library: [],
     searchQuery: '',
-    filters: ['Horror', 'Adventure', 'Fighting'],
+    filters: ['Horror', 'Adventure', 'Fighting', 'Strategy'],
+    price: 2000,
     loading: false
   }
   protected store$ = new BehaviorSubject<any>(this.defaultStore);

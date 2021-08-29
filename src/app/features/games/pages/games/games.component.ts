@@ -8,31 +8,14 @@ import {debounceTime, distinctUntilChanged, tap} from "rxjs/operators";
   templateUrl: './games.component.html',
   styleUrls: ['./games.component.css']
 })
-export class GamesComponent implements OnInit, AfterViewInit {
-  @ViewChild('search') search: ElementRef;
+export class GamesComponent implements OnInit {
 
   public games$: Observable<any>;
   public isLoading$: Observable<boolean>;
   public filtersOpen: Boolean = true;
 
-  public subtasks = [
-    {name: 'Horror', completed: true},
-    {name: 'Fighting', completed: true},
-    {name: 'Adventure', completed: true}
-  ]
-
   constructor(private gameService: GamesService) { }
 
-  ngAfterViewInit() {
-    fromEvent(this.search.nativeElement,'keyup')
-      .pipe(
-        debounceTime(500),
-        distinctUntilChanged(),
-        tap(() => {
-          this.gameService.setSearchString(this.search?.nativeElement.value || '');
-        })
-      ).subscribe()
-  }
   ngOnInit(): void {
    this.onResize();
    this.gameService.fetchGames$();
@@ -41,10 +24,5 @@ export class GamesComponent implements OnInit, AfterViewInit {
   }
   onResize(){
     this.filtersOpen = window.innerWidth > 500;
-  }
-  getSelected(){
-    const selected = this.subtasks.filter(el => el.completed);
-    const filters = selected.map(el => el.name);
-    this.gameService.setFilters(filters);
   }
 }

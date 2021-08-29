@@ -11,4 +11,7 @@ export class ProfileService {
   getProfileData$(){
     return this.http.get(this.url+'/api/profile/me');
   }
+  updateProfile$(data: any){
+    return this.http.patch(this.url+'/api/profile/me/update', data);
+  }
 }

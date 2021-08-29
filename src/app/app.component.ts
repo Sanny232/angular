@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {AuthService} from "./core/services/auth.service";
 
 
 @Component({
@@ -9,15 +8,6 @@ import {AuthService} from "./core/services/auth.service";
 })
 export class AppComponent {
   title = 'App';
-  loggedIn: boolean;
-  constructor(private authService: AuthService) {
-  }
-  ngOnInit(){
-    this.authService.logged$().subscribe(val => {
-      this.loggedIn = val;
-    });
-  }
-  exit(){
-    this.authService.logOut();
+  constructor() {
   }
 }

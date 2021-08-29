@@ -15,7 +15,7 @@ export class SearchFriendService extends StoreService{
       this.searchString = value;
     })
     this.http.post(this.url+'/api/friends/search', {searchQuery: this.searchString}).subscribe((value) => {
-      this.setState$({possible: value, loading: true});
+      this.setState$({possible: value, loading: false});
     })
   }
   setSearchString(query: string){

@@ -1,11 +1,15 @@
-<mat-card *ngIf="gameInfo" class="content">
-  <img src="{{gameInfo.photo}}" alt="">
+<div *ngIf="gameInfo" class="content">
   <mat-card-title>{{gameInfo.name}}</mat-card-title>
-  <p>Description: {{gameInfo.description}}</p>
-  <p>Price: {{gameInfo.price}}</p>
-  <p>Genre: {{gameInfo.genre}}</p>
-  <p>Rating: {{gameInfo.scores}}</p>
-</mat-card>
+  <p><mat-icon>description</mat-icon>{{gameInfo.description}}</p>
+  <mat-divider></mat-divider>
+  <p><mat-icon>attach_money</mat-icon>Price: {{gameInfo.price}}</p>
+  <mat-divider></mat-divider>
+  <p><mat-icon>info</mat-icon>Genre: {{gameInfo.genre}}</p>
+  <mat-divider></mat-divider>
+  <p><mat-icon>stars</mat-icon>Rating: {{gameInfo.scores}}</p>
+  <mat-divider></mat-divider>
+  <img src="{{gameInfo.photo}}" alt="">
+</div>
 <div class="content">
   <p *ngIf="!gameInfo">Game Not Found</p>
 </div>

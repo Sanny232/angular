@@ -1,26 +1,10 @@
 <mat-drawer-container class="content">
   <mat-drawer opened="{{filtersOpen}}" mode="side" class="sidenav" (window:resize)="onResize()">
-      <span class="genres-section">
-        <h1>Genres</h1>
-    <ul>
-      <li *ngFor="let subtask of subtasks">
-        <mat-checkbox [(ngModel)]="subtask.completed"
-                      color="primary"
-                      (change)="getSelected()">
-          {{subtask.name}}
-        </mat-checkbox>
-      </li>
-    </ul>
-  </span>
+    <game-filter></game-filter>
   </mat-drawer>
-  <div class="searchPanel">
-    <mat-form-field class="gamesSearch" appearance="standard">
-      <mat-label>Search games</mat-label>
-      <input matInput #search>
-      <mat-icon matSuffix>search</mat-icon>
-    </mat-form-field>
-  </div>
+    <game-search></game-search>
     <div class="gamesWrapper">
+      <p *ngIf="(games$ | async)?.length==0 && !(isLoading$ | async)" class="emptyResultMessage">No results</p>
       <div *ngIf="isLoading$ | async" class="load"><mat-progress-bar mode="indeterminate"></mat-progress-bar></div>
       <ng-container *ngFor="let game of games$ | async">
          <app-game-card [gameInfo]="game"></app-game-card>

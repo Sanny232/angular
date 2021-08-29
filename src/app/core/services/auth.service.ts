@@ -29,8 +29,8 @@ export class AuthService {
         localStorage.setItem('access_token', res.jwt_token);
         this.isLoggedIn$.next(true);
         this.router.navigate(['games']);
-      },
-      error => this._snackBar.open(error.error.message || 'Error', 'OK'));
+      }
+    )
   }
   logOut(){
     localStorage.removeItem('access_token');

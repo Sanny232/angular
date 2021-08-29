@@ -17,9 +17,7 @@ p{
   top: 70px;
   position: fixed;
 }
-.genres-section ul li{
-  padding: 2px;
-}
+
 .openFilters{
   position: fixed;
   width: 50px;
@@ -28,17 +26,7 @@ p{
   z-index: 101;
   cursor: pointer;
 }
-.searchPanel{
-  position: fixed;
-  width: 100%;
-  z-index: 1;
-  background-color: #fff;
-  border-bottom: solid 1px rgba(0,0,0,.12);
-}
-.gamesSearch{
-  width: 300px;
-  margin-left: 20px;
-}
+
 @media screen and (max-width:850px) {
   app-game-card {
     margin: 0 auto;

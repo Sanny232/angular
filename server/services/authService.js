@@ -33,9 +33,13 @@ const getProfile = _id => {
   return User.findOne({_id});
 }
 
+const updateProfile = async (_id, payload) => {
+  await User.findOneAndUpdate({_id: _id}, payload);
+}
 
 module.exports = {
   registration,
   login,
-  getProfile
+  getProfile,
+  updateProfile
 };

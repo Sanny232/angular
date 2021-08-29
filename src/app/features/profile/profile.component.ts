@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ProfileService} from "./profile.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-profile',
@@ -9,19 +10,17 @@ import {ProfileService} from "./profile.service";
 })
 export class ProfileComponent implements OnInit {
   public profileForm: FormGroup;
-
   onSubmit(){
     if(this.profileForm.valid)
-    console.log(this.profileForm.value)
+      this.profileService.updateProfile$(this.profileForm.value).subscribe(() => {
+        this._snackBar.open('Profile data was successfully updated!', '', {duration: 1000});
+        this.setProfileData();
+      });
   }
-  constructor(private profileService: ProfileService) { }
+  constructor(private profileService: ProfileService,
+              private _snackBar: MatSnackBar) { }
 
-  ngOnInit(): void {
-    this.profileForm = new FormGroup({
-      email: new FormControl('', [Validators.email]),
-      username: new FormControl(''),
-      age: new FormControl('')
-    })
+  setProfileData(){
     this.profileService.getProfileData$().subscribe((data: any) => {
       this.profileForm.get('email')?.setValue(data.email);
       this.profileForm.get('username')?.setValue(data.username);
@@ -29,4 +28,12 @@ export class ProfileComponent implements OnInit {
     })
   }
 
+  ngOnInit(): void {
+    this.profileForm = new FormGroup({
+      email: new FormControl('', [Validators.email, Validators.required]),
+      username: new FormControl('', [Validators.required]),
+      age: new FormControl('', [Validators.required])
+    })
+    this.setProfileData();
+  }
 }

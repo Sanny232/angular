@@ -3,18 +3,22 @@ import { CommonModule } from '@angular/common';
 import {LoginComponent} from "./components/login/login.component";
 import {SharedModule} from "../shared/shared.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { HeaderComponent } from './components/header/header.component';
+import {AppRoutingModule} from "../app-routing.module";
 
 
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [LoginComponent, HeaderComponent],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    AppRoutingModule
   ],
   exports: [
+    HeaderComponent
   ]
 })
 export class CoreModule {

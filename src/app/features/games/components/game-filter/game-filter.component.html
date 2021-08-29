@@ -1,0 +1,23 @@
+<span class="genres-section">
+        <h1>Genres</h1>
+    <ul>
+      <li *ngFor="let subtask of subtasks">
+        <mat-checkbox [(ngModel)]="subtask.completed"
+                      color="primary"
+                      (change)="getSelected()">
+          {{subtask.name}}
+        </mat-checkbox>
+      </li>
+    </ul>
+</span>
+<span>
+  <h1>Max Price</h1>
+<mat-slider
+  [(ngModel)]="price"
+  (change)="getSelected()"
+  thumbLabel
+  step="10"
+  min="0"
+  max="2000"
+  aria-label="units"></mat-slider>
+</span>

@@ -15,30 +15,8 @@ export class FriendsComponent implements OnInit {
               private requestsService: RequestsService,
               private searchFriends: SearchFriendService) { }
   friends$: Observable<any>;
-  requests$: Observable<any>;
-  possibleFriends$: Observable<any>;
   loading$: Observable<boolean>;
 
-  @ViewChild('search') search: ElementRef;
-  ngAfterViewInit() {
-    fromEvent(this.search.nativeElement,'keyup')
-      .pipe(
-        debounceTime(500),
-        distinctUntilChanged(),
-        tap(() => {
-          this.searchFriends.setSearchString(this.search?.nativeElement.value || '');
-        })
-      ).subscribe()
-  }
-  accept(id: string){
-    this.requestsService.acceptRequest(id);
-  }
-  reject(id: string){
-    this.requestsService.rejectRequest(id);
-  }
-  sendRequest(id: string){
-    this.searchFriends.sendRequest(id);
-  }
   removeFriend(id: string){
     this.friendsService.removeFriend(id);
   }
@@ -54,8 +32,6 @@ export class FriendsComponent implements OnInit {
   }
   ngOnInit(): void {
     this.friends$ = this.friendsService.getFriends$();
-    this.requests$ = this.requestsService.getRequests$();
-    this.possibleFriends$ = this.searchFriends.getPossibleFriends$();
     this.loading$ = this.friendsService.isLoading$();
   }
 }

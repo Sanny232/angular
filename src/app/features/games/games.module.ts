@@ -10,6 +10,8 @@ import { ShortenedPipe } from './pipes/shortened.pipe';
 import { LibraryItemComponent } from './components/library-item/library-item.component';
 import {ClipboardModule} from '@angular/cdk/clipboard';
 import { GamePageComponent } from './pages/game-page/game-page.component';
+import { GameSearchComponent } from './components/game-search/game-search.component';
+import { GameFilterComponent } from './components/game-filter/game-filter.component';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { GamePageComponent } from './pages/game-page/game-page.component';
     GamesComponent,
     ShortenedPipe,
     LibraryItemComponent,
-    GamePageComponent
+    GamePageComponent,
+    GameSearchComponent,
+    GameFilterComponent
   ],
   imports: [
     CommonModule,

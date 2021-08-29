@@ -11,6 +11,7 @@ export class GamesService extends StoreService {
   private url: String = 'https://angular-project-11.herokuapp.com';
   private filters: string[];
   private searchQuery: string;
+  private price: number;
 
   constructor(private http: HttpClient) {
     super();
@@ -20,8 +21,8 @@ export class GamesService extends StoreService {
     return this.store$.pipe(pluck('loading'));
   }
 
-  setFilters(fil: string[]){
-    this.setState$({filters: fil});
+  setFilters(fil: string[], price: number){
+    this.setState$({filters: fil, price: price});
     this.fetchGames$();
   }
   setSearchString(search: string){
@@ -32,12 +33,12 @@ export class GamesService extends StoreService {
     return this.store$.pipe(pluck('games'))
   }
   fetchGames$(){
-    console.log('LOAD GAMES')
     this.setState$({loading: true});
     this.store$.pipe(pluck('filters')).subscribe((value) => this.filters = value);
     this.store$.pipe(pluck('searchQuery')).subscribe((value) => this.searchQuery = value);
+    this.store$.pipe(pluck('price')).subscribe((value) => this.price = value);
 
-    const getGamesRequest = this.http.post(this.url+'/api/games/all', {searchQuery: this.searchQuery, filters: this.filters});
+    const getGamesRequest = this.http.post(this.url+'/api/games/all', {searchQuery: this.searchQuery, filters: this.filters, price: this.price});
     const getLibraryGamesRequest = this.http.get(this.url+'/api/games/library');
 
     return forkJoin({
