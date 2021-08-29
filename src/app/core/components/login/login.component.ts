@@ -22,7 +22,8 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   onSubmit(){
-    this.authService.signIn(this.email.value, this.password.value);
+    if(this.email.valid && this.password.valid)
+      this.authService.signIn(this.email.value, this.password.value);
   }
   ngOnInit(): void {
   }
