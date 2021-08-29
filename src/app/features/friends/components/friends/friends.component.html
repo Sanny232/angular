@@ -1,0 +1,33 @@
+<div class="content">
+  <mat-tab-group mat-align-tabs="center" animationDuration="0ms" (selectedIndexChange)=updateData($event)>
+    <mat-tab>
+      <p *ngIf="(friends$ | async)?.length==0 && !(loading$ | async)" class="emptyResultMessage">You have no friends :(
+      </p>
+      <p *ngIf="loading$ | async"><mat-progress-bar mode="indeterminate"></mat-progress-bar></p>
+      <ng-template mat-tab-label>
+        <mat-icon class="tab-icon">person</mat-icon>
+        Friends
+      </ng-template>
+      <mat-list role="list">
+        <mat-list-item class="item" role="listitem" *ngFor="let friend of friends$ | async">{{friend.username}}
+          <div class="spacer"></div>
+          <button mat-raised-button color="warn" (click)="removeFriend(friend._id)">Remove</button>
+        </mat-list-item>
+      </mat-list>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="tab-icon">search</mat-icon>
+        Find new
+      </ng-template>
+        <search-friends></search-friends>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="tab-icon">person_add</mat-icon>
+        Requests
+      </ng-template>
+      <friends-requests></friends-requests>
+    </mat-tab>
+  </mat-tab-group>
+</div>

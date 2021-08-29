@@ -1,0 +1,7 @@
+<div *ngIf="isLoading$ | async" class="load"><mat-progress-bar mode="indeterminate"></mat-progress-bar></div>
+<div class="gamesWrapper">
+  <p *ngIf="(library$ | async)?.length==0 && !(isLoading$ | async)" class="emptyResultMessage">Your library is empty!</p>
+  <ng-container *ngFor="let game of library$ | async">
+    <app-library-item [gameInfo]="game"></app-library-item>
+  </ng-container>
+</div>

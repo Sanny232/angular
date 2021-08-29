@@ -1,0 +1,21 @@
+.content{
+  margin-top: 70px;
+  max-width: 600px;
+  margin: 70px auto;
+}
+.spacer{
+  flex: 1;
+}
+.friendsSearch{
+  width: 100%;
+}
+.tab-icon{
+  margin-right: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+img{
+  width: 200px;
+  height: 200px;
+}
+

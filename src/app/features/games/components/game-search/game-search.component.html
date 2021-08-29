@@ -1,0 +1,9 @@
+<div class="searchPanel">
+  <mat-form-field class="gamesSearch" appearance="standard">
+    <mat-label>Search games</mat-label>
+    <input matInput #search type="search">
+    <button type="button" mat-icon-button matSuffix (click)="clearSearch()">
+      <mat-icon matSuffix>{{search.value.length > 0 ? 'clear' : 'search'}}</mat-icon>
+    </button>
+  </mat-form-field>
+</div>
